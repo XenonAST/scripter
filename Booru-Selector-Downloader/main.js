@@ -134,13 +134,15 @@
 
     function downloadLarger() {
         pUrls.map(pic => {
-            GMDownload(`${pic.largeFileUrl}`, `${pic.id}${re3.exec(pic.largeFileUrl)[0]}`)
+            console.log('pic',pic);
+            GMDownload(`${pic.largeFileUrl}`, `${pic.siteName}_${pic.id}${re3.exec(pic.largeFileUrl)[0]}`)
         })
     }
 
     function downloadOriginal() {
         pUrls.map(pic => {
-            GMDownload(`${pic.fileUrl}`, `${pic.id}${re3.exec(pic.fileUrl)[0]}`)
+            console.log('pic',pic);
+            GMDownload(`${pic.fileUrl}`, `${pic.siteName}_${pic.id}${re3.exec(pic.fileUrl)[0]}`)
         })
     }
 
@@ -241,6 +243,6 @@
     var HeadEl = document.getElementsByTagName('head').item(0);
     var ScriptEl = document.createElement("script");
     ScriptEl.type = "text/javascript";
-    ScriptEl.src = "https://beats0.github.io/scripter/Booru-Selector-Downloader/myselect.js";
+    ScriptEl.src = "https://raw.githack.com/XenonAST/scripter/master/Booru-Selector-Downloader/myselect.js";
     HeadEl.appendChild(ScriptEl);
 })();
