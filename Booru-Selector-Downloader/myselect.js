@@ -6,10 +6,21 @@ var REyandeResult = REyande.test(originUrl);
 var REkonachanResult = REkonachan.test(originUrl);
 var REdanbooruResult = REdanbooru.test(originUrl);
 
+var siteName = 'null';
+if (REyandeResult) {
+    siteName = 'yande';
+}
+if (REkonachanResult) {
+    siteName = 'konachan';
+}
+if (REdanbooruResult) {
+    siteName = 'danbooru';
+}
+
 function myselect(id) {
     var pitem;
-    if(REdanbooruResult) {
-        pitem = document.getElementById('post_'+id);
+    if (REdanbooruResult) {
+        pitem = document.getElementById('post_' + id);
     } else {
         pitem = document.getElementById("p" + id);
     }
@@ -40,7 +51,7 @@ function pJson() {
         var id = (re.exec(pic.attributes.onclick.nodeValue)[0]);
         var md5 = (re2.exec(pic.querySelectorAll('.directlink')[0].href)[0]);
         var largeFileUrl = pic.querySelectorAll('.directlink')[0].href
-        pUrls.push({id, md5, largeFileUrl});
+        pUrls.push({ siteName, id, md5, largeFileUrl });
     }
     window.pUrls = pUrls
 }
@@ -55,7 +66,7 @@ function DanboorupJson() {
         var md5 = postsItems[i].dataset.md5;
         var largeFileUrl = postsItems[i].dataset.largeFileUrl;
         var fileUrl = postsItems[i].dataset.fileUrl
-        pUrls.push({id, md5, largeFileUrl, fileUrl});
+        pUrls.push({ siteName, id, md5, largeFileUrl, fileUrl });
     }
     window.pUrls = pUrls
 }
@@ -127,7 +138,7 @@ function downloadURI(uri, name) {
 
 
 // jpg 和 png 下载自动切换
-function downloadImg(hostUrl,pUrls) {
+function downloadImg(hostUrl, pUrls) {
     for (let i = 0; i < pUrls.length; i++) {
         var img_filename = pUrls[i].id + '.jpg';
         var img_src = hostUrl + pUrls[i].md5 + '.jpg';
