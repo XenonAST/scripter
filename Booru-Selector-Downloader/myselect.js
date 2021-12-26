@@ -62,10 +62,16 @@ function DanboorupJson() {
     let pUrls = [];
     var postsItems = posts.querySelectorAll('.imgItemChecked');
     for (let i = 0; i < postsItems.length; i++) {
-        var id = postsItems[i].dataset.id;
-        var md5 = postsItems[i].dataset.md5;
+        // 20211227 danbooru 页面结构和信息变更
+        // 每张图片的 artical dataset 中不再包含 md5 和 fileurl，需要从其子节点 img 中获取修改
+        var articleNode = postsItems[i];
+        var imgNode = temp1.children[1].children[0].children[0].children[1];
+        var sourceUrl = imgNode.src;
+
+        var id = articleNode.dataset.id;
+        var md5 = sourceUrl.split('/')[source.split('/').length - 1].split('.')[0];
         var largeFileUrl = postsItems[i].dataset.largeFileUrl;
-        var fileUrl = postsItems[i].dataset.fileUrl
+        var fileUrl = sourceUrl.replace(/360x360|720x720/, 'original')
         pUrls.push({ siteName, id, md5, largeFileUrl, fileUrl });
     }
     window.pUrls = pUrls
