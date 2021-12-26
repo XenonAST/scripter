@@ -65,7 +65,7 @@ function DanboorupJson() {
         // 20211227 danbooru 页面结构和信息变更
         // 每张图片的 artical dataset 中不再包含 md5 和 fileurl，需要从其子节点 img 中获取修改
         var articleNode = postsItems[i];
-        var imgNode = temp1.children[1].children[0].children[0].children[1];
+        var imgNode = articleNode.children[1].children[0].children[0].children[1];
         var sourceUrl = imgNode.src;
 
         var id = articleNode.dataset.id;
