@@ -71,7 +71,7 @@ function DanboorupJson() {
         var id = articleNode.dataset.id;
         var md5 = sourceUrl.split('/')[sourceUrl.split('/').length - 1].split('.')[0];
         var largeFileUrl = postsItems[i].dataset.largeFileUrl;
-        var fileUrl = sourceUrl.replace(/360x360|720x720/, 'original')
+        var fileUrl = sourceUrl.replace(/360x360|720x720/, 'original').replace('.jpg', '.png')
         pUrls.push({ siteName, id, md5, largeFileUrl, fileUrl });
     }
     window.pUrls = pUrls
