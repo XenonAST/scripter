@@ -151,7 +151,16 @@
         var arg = {
             url,
             name: fileName,
-            onprogress: downloadProgress
+            onprogress: downloadProgress,
+            onerror: (e) => {
+                //console.log(e);
+                console.log(`download ${url} failed`);
+                if (url.includes('.jpg')){
+                    url = url.replace('.jpg', '.png');
+                    console.log(`try png ${url} instead`);
+                    GM_download({url, name:fileName, onprogress: downloadProgress, onerror: () => {console.log('download .png also failed')}})
+                }
+            }
         }
         console.log(arg)
         GM_download(arg)
